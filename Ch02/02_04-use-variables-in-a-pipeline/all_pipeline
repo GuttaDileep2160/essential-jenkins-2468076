@@ -1,0 +1,56 @@
+pipeline{
+
+    agent any
+
+    environment{
+        MAX_SIZE = 10
+        MIN_SIZE = 1
+    }
+
+    parameters{
+
+        string(name: 'NAME', defaultValue: 'DILEEP', description: 'please enter the name to proceed')
+        text(name: 'DESCRIBE', defaultValue: 'HI progtam i am from the text', description: 'it is vey long text please enter the value')
+        choice(name: 'AWS_REGION', choices: ['us-east-1', 'us-east-2', 'us-east-3'], description: 'please enter the aws region to select')
+        booleanParam(name: 'TEST', defaultValue: 'false', description: 'pleasee enter the value ture to perform test')
+        password(name: 'PASSWORD', defaultValue: 'PASSWORD', description: 'please eneter the paassword')
+    }
+
+    stages{
+
+        stage('default env variables'){
+
+
+            steps{
+
+                echo "the value of MAX_SIZE is = ${env.MAX_SIZE}"
+                echo "the default value of MIN_SIZE = ${env.MIN_SIZE}"
+            }
+        }
+
+        stage('10X values'){
+            environment{
+                MAX_SIZE = 100
+                MIN_SIZE = 10
+            }
+
+            steps{
+
+                echo "the MAX_SIZE is = ${env.MAX_SIZE}"
+                echo "the min_size is = ${env.MIN_SIZE}"
+            }
+        }
+
+        stage('the params stage'){
+
+            steps{
+
+                echo "the string value is : ${params.NAME}"
+                echo "the text value is: ${params.DESCRIBE}"
+                echo "the choice is: ${params.AWS_REGION}"
+                echo "the boolean value is: ${params.TEST}"
+                echo "the passwors is: ${params.PASSWORD}"
+            }
+        }
+    }
+}

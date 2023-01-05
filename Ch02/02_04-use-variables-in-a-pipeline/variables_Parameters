@@ -1,0 +1,22 @@
+pipeline{
+    agent any
+
+    parameters{
+
+        string(name: 'FATHER',defaultValue: 'Syam', description: 'Enter the father name')
+        text(name: 'PHRASE', defaultValue: 'Please enter the text of your life time', description: 'Please enter the text file')
+        booleanParam(name: 'TEST', defaultValue: 'false', description: 'please provide value to run the tests')
+        choice(name: 'AWS_REGION' choices: ['us-east-1', 'us-east-2', 'us-east-3'], description: 'please enter the aws region to be used')
+        password(name: 'DATABASE_PWD', defaultValue: 'DATABASE', description: 'please enter te database pwd')
+    }
+
+    stages{
+        stage('parameters stage'){
+
+            steps{
+
+                echo "the string variable is:${params.FATHER}"
+            }
+        }
+    }
+}
